@@ -1,43 +1,50 @@
 #include "main.h"
 
-int _printf(const char *format, ...) {
+int _printf(const char *format, ...)
+{
 	int char_count = 0;
+
 	va_list args;
+
 	va_start(args, format);
-	
-	while (*format) {
-		if (*format == '%') {
-			format++; /* Move to the character after '%'*/
-			if (*format == '\0') {
-				break; /* Format string ends with '%'*/
+
+	while (*format)
+	{
+		if (*format == '%')
+		{
+			format++;
+			if (*format == '\0')
+			{
+				break;
 			}
-			if (*format == 'c') {
-				/*Handle character specifier*/
+			if (*format == 'c')
+			{
 				char c = va_arg(args, int);
+
 				putchar(c);
 				char_count++;
-			} else if (*format == 's') {
-                /*Handle string specifier*/
+
+			} else if (*format == 's')
+
 				char *str = va_arg(args, char *);
-				while (*str) {
+
+				while (*str)
+				{
 					putchar(*str);
 					str++;
 					char_count++;
 				}
-			} else if (*format == '%') {
-                /* Handle '%' specifier */
+			} else if (*format == '%')
+			{
 				putchar('%');
 				char_count++;
-			} else {
-                /*Invalid specifier, ignore it */
-			}
-		} else {
+			} else
 			putchar(*format);
 			char_count++;
 		}
 		format++;
 	}
-	
+
 	va_end(args);
-	return char_count;
+	return (char_count);
 }
