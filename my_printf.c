@@ -3,6 +3,9 @@
 int _printf(const char *format, ...)
 {
 	int char_count = 0;
+	int x = 0;
+	char *str;
+	char c;
 
 	va_list args;
 
@@ -17,29 +20,36 @@ int _printf(const char *format, ...)
 				break;
 			if (*format == 'c')
 			{
-				char c = va_arg(args, int);
+				c = va_arg(args, int);
 
 				putchar(c);
 				char_count++;
 
-			} else if (*format == 's')
+			}
 
-				char *str = va_arg(args, char *);
+			if (*format == 's')
+			{
+				str = va_arg(args, char *);
 
-				while (*str)
+				while (str[x] != '\0')
 				{
 					putchar(*str);
 					str++;
 					char_count++;
 				}
-			} else if (*format == '%')
+			}
+			else
 			{
 				putchar('%');
 				char_count++;
-			} else
+			}
+		}
+		else
+		{
 			putchar(*format);
 			char_count++;
 		}
+
 		format++;
 	}
 
