@@ -33,8 +33,10 @@ int _printf(const char *format, ...)
 
 				while (str[x] != '\0')
 				{
-					putchar(*str);
-					str++;
+					if (str[x] == '%')
+						continue;
+					putchar(str[x]);
+					x++;
 					char_count++;
 				}
 			}
